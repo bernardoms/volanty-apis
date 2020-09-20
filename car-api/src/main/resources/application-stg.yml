@@ -1,0 +1,5 @@
+spring:
+  cache:
+    caffeine:
+      spec: maximumSize=500, expireAfterAccess=10m
+    cache-names: cars, car

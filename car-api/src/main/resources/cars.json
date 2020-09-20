@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "brand": "VW",
+    "model": "Golf",
+    "cav": "Botafogo"
+  },
+  {
+    "id": 2,
+    "brand": "Ford",
+    "model": "Fiesta",
+    "cav": "Norte Shopping"
+  },
+  {
+    "id": 3,
+    "brand": "GM",
+    "model": "Cruze",
+    "cav": "Barra da Tijuca"
+  },
+  {
+    "id": 4,
+    "brand": "GM",
+    "model": "Cobalt",
+    "cav": "Barra da Tijuca"
+  },
+  {
+    "id": 5,
+    "brand": "GM",
+    "model": "Cobalt",
+    "cav": "Barra da Tijuca"
+  },
+  {
+    "id": 6,
+    "brand": "Fiat",
+    "model": "Palio",
+    "cav": "Barra da Tijuca"
+  },
+  {
+    "id": 7,
+    "brand": "GVW",
+    "model": "Up",
+    "cav": "Botafogo"
+  }
+]

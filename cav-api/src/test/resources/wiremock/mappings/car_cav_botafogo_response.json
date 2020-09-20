@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/v1/cars/1"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "car_cav_botafogo_response.json",
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    }
+  }
+}

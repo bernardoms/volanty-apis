@@ -1,0 +1,18 @@
+version: '3'
+services:
+  wiremock:
+    image: ekino/wiremock
+    ports:
+      - "3002:8080"
+    volumes:
+      - ./src/test/resources/wiremock/__files:/wiremock/__files
+      - ./src/test/resources/wiremock/mappings:/wiremock/mappings
+  cavapi:
+    build: .
+    container_name: cav-api
+    ports:
+      - "8081:8081"
+    environment:
+      - "JAVA_OPTS=-Dnewrelic.config.app_name=v1/cav-api -Dnewrelic.config.license_key= -Dcar.client.endpoint=http://wiremock:8080/v1"
+    depends_on:
+      - wiremock

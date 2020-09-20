@@ -1,0 +1,52 @@
+version: '3'
+services:
+  cav-api:
+    build: ./cav-api
+    container_name: cav-api
+    ports:
+      - "8081:8081"
+    environment:
+      - "JAVA_OPTS=-Dnewrelic.config.app_name=v1/car-api -Dnewrelic.config.license_key= -Dcar.client.endpoint=http://car:8080/v1"
+    depends_on:
+      - car-api
+
+  car-api:
+    build: ./cav-api
+    container_name: car-api
+    ports:
+      - "8080:8080"
+    environment:
+      - "JAVA_OPTS=-Dnewrelic.config.app_name=v1/cav-api -Dnewrelic.config.license_key="
+
+  ## LOGS CONTAINERS
+  filebeat:
+    hostname: filebeat
+    build:
+      context: ./logs/filebeat
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro           # Docker logs
+      - /var/run/docker.sock:/var/run/docker.sock:ro                       # Additional information about containers
+      - ./filebeat/data:/usr/share/filebeat/data:rw                        # Persistence data
+    links:
+      - elasticsearch
+
+  elasticsearch:
+    build:
+      context: ./logs/elasticsearch/
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - cluster.name=logging-cluster
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+      - discovery.type=single-node
+
+  kibana:
+    build:
+      context: ./logs/kibana/
+    ports:
+      - "5601:5601"
+    environment:
+      - "LOGGING_QUIET=true"
+    depends_on:
+      - elasticsearch
